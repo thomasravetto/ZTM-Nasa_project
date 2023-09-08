@@ -1,6 +1,7 @@
 const { getAllLaunches,
         addNewLaunch,
-        existsLaunchWithId } = require('../../models/launches.model');
+        existsLaunchWithId,
+        abortLaunchById} = require('../../models/launches.model');
 
 const httpGetAllLaunches = (req, res) => {
     return res.status(200).json(getAllLaunches())
@@ -27,7 +28,7 @@ const httpAddNewLaunch = (req, res) => {
 }
 
 const httpAbortLaunch = (req, res) => {
-    const launchId = req.params.id
+    const launchId = +req.params.id;
 
     if (!existsLaunchWithId(launchId)) {
         return res.status(404).json({
@@ -35,10 +36,12 @@ const httpAbortLaunch = (req, res) => {
         })
     }
 
+    const aborted = abortLaunchById(launchId)
     return res.status(200).json(aborted)
 }
 
 module.exports = {
     httpGetAllLaunches,
-    httpAddNewLaunch
+    httpAddNewLaunch,
+    httpAbortLaunch
 }
