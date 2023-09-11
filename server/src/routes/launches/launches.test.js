@@ -60,7 +60,7 @@ describe('Test POST /launches', () => {
     test('It should catch invalid dates', async () => {
         const response = await request(app)
             .post('/launches')
-            .send(launchDataWithInvalidDate)
+             .send(launchDataWithInvalidDate)
             .expect('Content-Type', /json/)
             .expect(400);
 
