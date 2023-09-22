@@ -14,13 +14,18 @@ const server = http.createServer(app)
 // Since the load planet function is asyncronous, I am calling async await when I start the server
 // so that the data is loaded before starting
 async function startServer() {
-    await mongoConnect();
+    try {
+        await mongoConnect();
     await loadPlanetsData();
     await loadLaunchData();
 
     server.listen(PORT, () => {
         console.log("Server working and listening on port:", PORT)
     })
-}
+    } catch {
+        console.error("An error occurred while starting the server")
+        }
+    }
+
 
 startServer()
