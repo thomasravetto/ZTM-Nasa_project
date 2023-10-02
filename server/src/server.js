@@ -16,16 +16,16 @@ const server = http.createServer(app)
 async function startServer() {
     try {
         await mongoConnect();
-    await loadPlanetsData();
-    await loadLaunchData();
+        await loadPlanetsData();
+        await loadLaunchData();
 
-    server.listen(PORT, () => {
-        console.log("Server working and listening on port:", PORT)
-    })
+        server.listen(PORT, () => {
+            console.log("Server working and listening on port:", PORT)
+        })
     } catch {
         console.error("An error occurred while starting the server")
-        }
     }
+}
 
 
 startServer()
